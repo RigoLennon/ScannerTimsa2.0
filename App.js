@@ -17,6 +17,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 //Custom import's
 import CameraPage from './src/components/camera.component';
+import pickImageScreen from './src/components/pickImage';
 import styles from './src/styles';
 import { db } from './src/firebase';
 import LogoTitle from './src/components';
@@ -40,6 +41,7 @@ class HomeScreen extends React.Component {
               />
             </TouchableOpacity>
             <Text style={styles.textDefault}>Escanear documento</Text>
+            <Button onPress={() => this.props.navigation.navigate('PickImage')}/>
           </View>
 
           <View style={[styles.box, styles.box2]}>
@@ -165,11 +167,22 @@ class HomeScreen extends React.Component {
     }
   }
 
+  class pickImagePage extends React.Component {
+    render(){
+      return(
+        <View style={styles.container}>
+          <pickImageScreen />
+        </View>
+      );
+    }
+  }
+
   //Manejo de rutas de la Aplicacion
   const RootStack = createStackNavigator({
     Home: HomeScreen,
     Scanner: BarCodeScreen,
-    Camera: CameraScreen
+    Camera: CameraScreen,
+    PickImage: pickImagePage
   },
   {
     initialRouteName: 'Home',
