@@ -5,19 +5,17 @@ import {
   Text,
   StyleSheet,
   Alert,
-  ToastAndroid,
   TouchableOpacity
 } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import * as Permissions from 'expo-permissions';
 import { BarCodeScanner } from 'expo-barcode-scanner';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 
 
 //Custom import's
-import CameraPage from './src/components/camera.component';
-import pickImageScreen from './src/components/pickImage';
+import PickImageScreen from './src/components/pickImage';
 import styles from './src/styles';
 import { db } from './src/firebase';
 import LogoTitle from './src/components';
@@ -31,7 +29,6 @@ class HomeScreen extends React.Component {
   render(){
     return(
       <View style={styles.container}>
-    
           <View style={[styles.box, styles.box1]}>
             <TouchableOpacity onPress={() => this.props.navigation.navigate('Scanner')}>
               <MaterialCommunityIcons 
@@ -41,18 +38,17 @@ class HomeScreen extends React.Component {
               />
             </TouchableOpacity>
             <Text style={styles.textDefault}>Escanear documento</Text>
-            <Button onPress={() => this.props.navigation.navigate('PickImage')}/>
           </View>
 
           <View style={[styles.box, styles.box2]}>
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('Camera') }>
-              <MaterialCommunityIcons 
-                name="camera" 
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('PickImage')}>
+              <MaterialIcons 
+                name="note-add" 
                 size={100} 
                 color="#02326D"
               />
             </TouchableOpacity>
-            <Text style={styles.textDefault}>Tomar foto al documento</Text>
+            <Text style={styles.textDefault}>Añadir documento</Text>
           </View>
 
           <View style={ styles.footer }>
@@ -64,7 +60,6 @@ class HomeScreen extends React.Component {
     );
   }
 }
-
 
 /**  ESCANER DE DOCUMENTO 
  *   ESTA FUNCION PERMITE ESCANEAR EL DOCUMENTO 
@@ -157,21 +152,11 @@ class HomeScreen extends React.Component {
  }
  
   //Clase de la camara
-  class CameraScreen extends React.Component {
+  class PickImagePage extends React.Component {
     render(){
       return(
         <View style={styles.container}>
-          <CameraPage />
-        </View>
-      );
-    }
-  }
-
-  class pickImagePage extends React.Component {
-    render(){
-      return(
-        <View style={styles.container}>
-          <pickImageScreen />
+          <PickImageScreen />
         </View>
       );
     }
@@ -181,8 +166,7 @@ class HomeScreen extends React.Component {
   const RootStack = createStackNavigator({
     Home: HomeScreen,
     Scanner: BarCodeScreen,
-    Camera: CameraScreen,
-    PickImage: pickImagePage
+    PickImage: PickImagePage
   },
   {
     initialRouteName: 'Home',

@@ -111,4 +111,8 @@ export default StyleSheet.create({
         backgroundColor: "red",
         borderColor: "transparent",
     },
+    bigText: {
+        fontSize: 50,
+        fontWeight: 'bold'
+    }
 });
